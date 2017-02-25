@@ -71,6 +71,7 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.*")):
                 cv2.circle(siftpic,(int(i.pt[0]),int(i.pt[1])),1,tuple(facecolor),-1)
                 jiaodu = i.angle
                 r  = i.size*0.5
+                print type(i.pt)
                 cv2.line(siftpic,(int(i.pt[0]),int(i.pt[1])),(int(i.pt[0]+r*math.cos(jiaodu)),int(i.pt[1]+r*math.sin(jiaodu))), facecolor,1)
         # print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
         #     k, d.left(), d.top(), d.right(), d.bottom()))
