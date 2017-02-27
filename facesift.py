@@ -18,7 +18,7 @@ def getDistance(k1,k2):
 
 
 test_case='86.jpg'
-foldnum=8
+foldnum=8 
 
 faces_folder_path = '/home/cunrui/tmp/face/'+str(foldnum)+'/'
 
