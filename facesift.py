@@ -17,19 +17,22 @@ def getDistance(k1,k2):
     return dis
 
 
-test_case=1
+test_case='86.jpg'
 foldnum=8
 
 faces_folder_path = '/home/cunrui/tmp/face/'+str(foldnum)+'/'
 
-test_faces_folder_path = '/home/cunrui/tmp/face/12/'
+test_faces_folder_path = '/home/cunrui/tmp/face/14/'
 
 detector = cv2.xfeatures2d.SIFT_create()
 ls = []
 pics = glob.glob(os.path.join(faces_folder_path, "*.*"))
 pics_test = glob.glob(os.path.join(test_faces_folder_path, "*.*"))
+
+img1 = cv2.imread(test_faces_folder_path+test_case)
 for f in range(0,len(pics),1):
-    img1 = cv2.imread(pics_test[test_case])
+    # img1 = cv2.imread(pics_test[test_case])
+    img1 = cv2.imread(test_faces_folder_path + test_case)
     img2 = cv2.imread(pics[f])
 
     img1_gray = cv2.cvtColor(img1, cv2.COLOR_RGB2GRAY)
@@ -50,7 +53,7 @@ for f in range(0,len(pics),1):
     for m,n in enumerate(matches):
         # print m,n.queryIdx,n.trainIdx,kp1[n.queryIdx].pt,kp2[n.trainIdx].pt
 
-        if getDistance(kp1[n.queryIdx].pt,kp2[n.trainIdx].pt)>=50.0:
+        if getDistance(kp1[n.queryIdx].pt,kp2[n.trainIdx].pt)>=60.0:
             # print type(matches)
             # print n.queryIdx, n.trainIdx, getDistance(kp1[n.queryIdx].pt, kp2[n.trainIdx].pt), n.distance
             # print matches.count(n)
@@ -96,7 +99,7 @@ for f in range(0,len(pics),1):
     #     continue
 print  Counter(ls),len(ls)
 ld = Counter(ls)
-img4 = cv2.imread(pics_test[test_case])
+img4 = cv2.imread(test_faces_folder_path + test_case)
 # font = cv2.InitFont(cv2.CV_FONT_HERSHEY_SCRIPT_SIMPLEX, 1, 1, 0, 3, 8)
 circlecolor = [0, 255, 255]
 facecolor = [0, 0, 255]
