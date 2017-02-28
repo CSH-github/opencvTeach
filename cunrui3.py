@@ -8,6 +8,7 @@ from skimage import io
 import os
 import random
 import math
+from collections import Counter
 
 def isInsidePolygon(pt, poly):
     c = False
@@ -28,7 +29,7 @@ def isInsidePolygon(pt, poly):
 
 predictor_path = '/home/cunrui/tmp/shape_predictor_68_face_landmarks.dat'
 # faces_path = '/home/cunrui/tmp/face/3/s4_1.JPG'
-faces_folder_path = '/home/cunrui/tmp/face/14/'
+faces_folder_path = '/home/cunrui/tmp/face/13/'
 
 # img = cv2.imread(faces_path)
 # imgtmp = cv2.imread(faces_path)
@@ -43,6 +44,7 @@ w=0;
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(predictor_path)
+ls =[]
 
 
 
@@ -73,6 +75,9 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.*")):
                 cv2.circle(siftpic,(int(i.pt[0]),int(i.pt[1])),1,tuple(facecolor),-1)
                 jiaodu = i.angle
                 r  = i.size*0.5
+                a = list(i.pt)
+                # print [int(a[0]),int(a[1])]
+                ls.append((int(a[0]), int(a[1]), i.size, i.angle))
                 # print type(i.pt)
                 cv2.line(siftpic,(int(i.pt[0]),int(i.pt[1])),(int(i.pt[0]+r*math.cos(jiaodu)),int(i.pt[1]+r*math.sin(jiaodu))), facecolor,1)
         # print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
@@ -87,5 +92,20 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.*")):
 win = cv2.namedWindow('image', cv2.WINDOW_GUI_EXPANDED)
 cv2.imshow('image',siftpic)
 cv2.imwrite("./result/1-line-size50.jpg", siftpic, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+ld = Counter(ls)
+print ld
+test_case ='81.jpg'
+img4 = cv2.imread(faces_folder_path + test_case)
+circlecolor = [0, 255, 255]
+facecolor = [0, 0, 255]
+for d,x in ld.items():
+    lm = list(d)
+    if x>=30:
+        img4 = cv2.line(img4,(lm[0],lm[1]),(int(lm[0]+lm[2]*0.8*math.cos(lm[3])),int(lm[1]+lm[2]*0.8*math.sin(lm[3]))),facecolor,1)
+        cv2.circle(img4, (lm[0],lm[1]), 1, circlecolor, 2)
+        cv2.putText(img4,str(x),(lm[0],lm[1]+random.randint(0, 20)),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0, 255, 255),1)
+
+cv2.imshow('image2', img4)
+cv2.imwrite("../result-sface/" +str(test_case)+'_'+'13'+".jpg", img4, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
 cv2.waitKey(0)
 cv2.destroyAllWindows()

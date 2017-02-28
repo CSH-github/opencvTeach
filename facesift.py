@@ -17,12 +17,12 @@ def getDistance(k1,k2):
     return dis
 
 
-test_case='86.jpg'
-foldnum=8 
+test_case='911.jpg'
+foldnum=9
 
 faces_folder_path = '/home/cunrui/tmp/face/'+str(foldnum)+'/'
 
-test_faces_folder_path = '/home/cunrui/tmp/face/14/'
+test_faces_folder_path = '/home/cunrui/tmp/face/13/'
 
 detector = cv2.xfeatures2d.SIFT_create()
 ls = []
@@ -105,7 +105,7 @@ circlecolor = [0, 255, 255]
 facecolor = [0, 0, 255]
 for d,x in ld.items():
     lm = list(d)
-    if x>=40:
+    if x>=30:
         img4 = cv2.line(img4,(lm[0],lm[1]),(int(lm[0]+lm[2]*0.8*math.cos(lm[3])),int(lm[1]+lm[2]*0.8*math.sin(lm[3]))),facecolor,1)
         cv2.circle(img4, (lm[0],lm[1]), 1, circlecolor, 2)
         cv2.putText(img4,str(x),(lm[0],lm[1]+random.randint(0, 20)),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0, 255, 255),1)
