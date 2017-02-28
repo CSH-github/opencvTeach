@@ -25,10 +25,14 @@ def isInsidePolygon(pt, poly):
 
 
 #print cv2.__version__
+foldnum='11'
+sizeDoor =50
+
+
 
 predictor_path = '/home/cunrui/tmp/shape_predictor_68_face_landmarks.dat'
 # faces_path = '/home/cunrui/tmp/face/3/s4_1.JPG'
-faces_folder_path = '/home/cunrui/tmp/face/14/'
+faces_folder_path = '/home/cunrui/tmp/face/'+foldnum+'/'
 
 # img = cv2.imread(faces_path)
 # imgtmp = cv2.imread(faces_path)
@@ -69,12 +73,12 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.*")):
         facecolor =[random.randint(0, 255),random.randint(0, 255),random.randint(0, 255)]
         for i in kp1:
             # print i.response,i.size
-            if i.size>50.0:
+            if i.size>sizeDoor:
                 cv2.circle(siftpic,(int(i.pt[0]),int(i.pt[1])),1,tuple(facecolor),-1)
                 jiaodu = i.angle
                 r  = i.size*0.5
                 # print type(i.pt)
-                cv2.line(siftpic,(int(i.pt[0]),int(i.pt[1])),(int(i.pt[0]+r*math.cos(jiaodu)),int(i.pt[1]+r*math.sin(jiaodu))), facecolor,1)
+                # cv2.line(siftpic,(int(i.pt[0]),int(i.pt[1])),(int(i.pt[0]+r*math.cos(jiaodu)),int(i.pt[1]+r*math.sin(jiaodu))), facecolor,1)
         # print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
         #     k, d.left(), d.top(), d.right(), d.bottom()))
         # # Get the landmarks/parts for the face in box d.
@@ -86,6 +90,6 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.*")):
 
 win = cv2.namedWindow('image', cv2.WINDOW_GUI_EXPANDED)
 cv2.imshow('image',siftpic)
-cv2.imwrite("./result/1-line-size50.jpg", siftpic, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+cv2.imwrite("./result/cunrui2_"+foldnum+'_'+str(sizeDoor)+".jpg", siftpic, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
 cv2.waitKey(0)
 cv2.destroyAllWindows()
