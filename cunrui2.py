@@ -25,8 +25,9 @@ def isInsidePolygon(pt, poly):
 
 
 #print cv2.__version__
-foldnum='11'
-sizeDoor =50
+foldnum='14'
+sizeDoorMin =20
+sizeDoorMax =50
 
 
 
@@ -73,7 +74,7 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.*")):
         facecolor =[random.randint(0, 255),random.randint(0, 255),random.randint(0, 255)]
         for i in kp1:
             # print i.response,i.size
-            if i.size>sizeDoor:
+            if i.size>=sizeDoorMin and i.size<=sizeDoorMax:
                 cv2.circle(siftpic,(int(i.pt[0]),int(i.pt[1])),1,tuple(facecolor),-1)
                 jiaodu = i.angle
                 r  = i.size*0.5
@@ -90,6 +91,6 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.*")):
 
 win = cv2.namedWindow('image', cv2.WINDOW_GUI_EXPANDED)
 cv2.imshow('image',siftpic)
-cv2.imwrite("./result/cunrui2_"+foldnum+'_'+str(sizeDoor)+".jpg", siftpic, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+cv2.imwrite("../result/cunrui2_"+foldnum+'_'+str(sizeDoorMin)+str(sizeDoorMax)+".jpg", siftpic, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
 cv2.waitKey(0)
 cv2.destroyAllWindows()
