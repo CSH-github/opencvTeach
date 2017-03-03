@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../average_portrait/.idea/average_portrait.iml" filepath="$PROJECT_DIR$/../average_portrait/.idea/average_portrait.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/opencvTeach.iml" filepath="$PROJECT_DIR$/.idea/opencvTeach.iml" />
     </modules>
   </component>

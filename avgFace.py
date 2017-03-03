@@ -25,7 +25,7 @@ import cv2
 # ARGS = ARG_PARSER.parse_args()
 
 predictor_path ='/home/cunrui/tmp/shape_predictor_68_face_landmarks.dat'
-faces_folder_path = '/home/cunrui/tmp/face/zang_v/'
+faces_folder_path = '/home/cunrui/tmp/face/zhuang_n/'
 
 
 # DIR = os.path.dirname(filepath)
@@ -58,10 +58,12 @@ for f in glob.glob(os.path.join(faces_folder_path, "*.*")):
         img = color.gray2rgb(img)
 
     #Detect bounds of faces, second arg means upscale 1 time(s) to help with detection.
+    print f
     dets = DETECTOR(img, 1)
     # if ARGS.verbose:
     #     print("Number of faces detected: {}".format(len(dets)))
     face = largest_face(dets)
+
     if face is None:
         continue
     shape = PREDICTOR(img, face)
