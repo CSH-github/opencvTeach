@@ -25,7 +25,7 @@ import cv2
 # ARGS = ARG_PARSER.parse_args()
 
 predictor_path ='/home/cunrui/tmp/shape_predictor_68_face_landmarks.dat'
-faces_folder_path = '/home/cunrui/tmp/face/zhuang_n/'
+faces_folder_path = '/home/cunrui/tmp/face/zhuang_v/'
 
 
 # DIR = os.path.dirname(filepath)
