@@ -25,7 +25,7 @@ import cv2
 # ARGS = ARG_PARSER.parse_args()
 
 predictor_path ='/home/cunrui/tmp/shape_predictor_68_face_landmarks.dat'
-faces_folder_path = '/home/cunrui/tmp/face/zhuang_v/'
+faces_folder_path = '/home/cunrui/tmp/face/man_v/'
 
 
 # DIR = os.path.dirname(filepath)
@@ -118,6 +118,6 @@ MEAN_IMG = np.mean(WARPED_IMGS, axis=0)
 
 plt.imshow(MEAN_IMG)
 # plt.axis('off')
-misc.imsave('/home/cunrui/'+faces_folder_path[21:len(faces_folder_path)-1]+'.png', MEAN_IMG)
+misc.imsave('/home/cunrui/minzuface/'+faces_folder_path[21:len(faces_folder_path)-1]+'.png', MEAN_IMG)
 # plt.savefig('/home/cunrui/cc.png')
 plt.show()
