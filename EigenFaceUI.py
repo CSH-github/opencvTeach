@@ -1,4 +1,5 @@
 #coding=utf-8
+#sudo apt-get install python-wxgtk3.0
 import wx
 import  cStringIO
 import EigenFaceText
